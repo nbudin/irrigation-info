@@ -47,21 +47,27 @@ app.get("/", async (c) => {
       state.attributes.zone_id
   );
 
-  const zoneResponses = irrigationUnlimitedZones.map((zone) => {
-    const soilMoistureSensorId = zone.attributes.user_soil_moisture_sensor_id;
+  const soilMoistureSensorIds = new Set(
+    irrigationUnlimitedZones
+      .map((zone) => zone.attributes.user_soil_moisture_sensor_id)
+      .filter(Boolean)
+  );
 
-    const soilMoistureSensorState =
-      soilMoistureSensorId && statesByEntityId.get(soilMoistureSensorId)?.state;
+  const soilMoistureSensors = [...soilMoistureSensorIds].map((sensorId) =>
+    statesByEntityId.get(sensorId)
+  );
 
-    return {
+  return c.json({
+    zones: irrigationUnlimitedZones.map((zone) => ({
       name: zone.attributes.friendly_name,
       nextStart: zone.attributes.next_start,
       nextDuration: zone.attributes.next_duration,
-      soilMoisture: soilMoistureSensorState,
-    };
+    })),
+    soilMoistureSensors: soilMoistureSensors.map((sensor) => ({
+      name: sensor.attributes.friendly_name,
+      state: sensor.state,
+    })),
   });
-
-  return c.json(zoneResponses);
 });
 
 const port = process.env.PORT ? Number.parseInt(process.env.PORT) : 3000;
