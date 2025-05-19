@@ -29,7 +29,7 @@ jobs:
           platforms: linux/amd64
           target: production
           tags: |
-            ghcr.io/${{ github.event.organization }}/${{ github.event.repository }}:${{ github.sha }}
+            ghcr.io/${{ github.event.repository.organization }}/${{ github.event.repository.name }}:${{ github.sha }}
   update-release-draft:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.event.ref == 'refs/heads/main'
