@@ -27,7 +27,6 @@ jobs:
           push: ${{ github.event_name == 'push' && github.event.ref == 'refs/heads/main' }}
           load: ${{ !(github.event_name == 'push' && github.event.ref == 'refs/heads/main') }}
           platforms: linux/amd64
-          target: production
           tags: |
             ghcr.io/${{ github.event.repository.full_name }}:${{ github.sha }}
   update-release-draft:
