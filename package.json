@@ -1,4 +1,15 @@
 {
   "name": "irrigation-info",
-  "packageManager": "yarn@4.4.1"
+  "packageManager": "yarn@4.9.1",
+  "dependencies": {
+    "@hono/node-server": "^1.14.2",
+    "dotenv": "^16.5.0",
+    "hono": "^4.7.10",
+    "zod": "^3.25.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.19",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
 }
