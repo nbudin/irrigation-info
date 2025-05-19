@@ -1,6 +1,10 @@
 {
   "name": "irrigation-info",
   "packageManager": "yarn@4.9.1",
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "tsx --watch src/index.ts"
+  },
   "dependencies": {
     "@hono/node-server": "^1.14.2",
     "dotenv": "^16.5.0",
